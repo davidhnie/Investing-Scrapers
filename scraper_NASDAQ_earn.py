@@ -164,6 +164,6 @@ while date<=end:
     date = date + timedelta(days=1)
 
 #write data to csv
-with open ('D:\\Safe_IKF\\IKF_DimaN\\Projects\\Web_data_scrapers\\Output_files\\NADSAQ-earn-'+start.strftime('%m-%d-%Y')+'.csv','w',newline='') as fp:
+with open ('D:\\Safe_IKF\\IKF_DimaN\\Projects\\Web_data_scrapers\\Output_files\\NADSAQ-earn-'+datetime.now().strftime("%Y-%m-%d %H:%M:%S")+'.csv','w',newline='') as fp:
 	a = csv.writer(fp,delimiter=',')
 	a.writerows(data)

@@ -56,7 +56,9 @@ while date<=end:
 	#set date 
 	date = date + timedelta(days=1)
 
+	#european date
+
 #write data to csv
-with open ('NADSAQ-surprise-'+start.strftime('%m-%d-%Y')+'.csv','w',newline='') as fp:
+with open ('NADSAQ-surprise-'+datetime.now().strftime("%Y-%m-%d %H:%M:%S")+'.csv','w',newline='') as fp:
 	a = csv.writer(fp,delimiter=',')
 	a.writerows(data)

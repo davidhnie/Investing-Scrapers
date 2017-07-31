@@ -26,22 +26,24 @@ for j in range(4):
 		symbol = rows[i].h3.a.string.strip()
 		market = rows[i].find_all('td')[2].string
 		brokerage = rows[i].find_all('td')[3].string
-		if (j != 2):
-			froms = rows[i].find_all('td')[4].string
-			tos = rows[i].find_all('td')[5].string
+
+		if (j == 2):
+			tos = froms = rows[i].find_all('td')[4].string
+
 		else:
 			froms = rows[i].find_all('td')[4].string
-			tos = rows[i].find_all('td')[4].string
+			tos = rows[i].find_all('td')[5].string
+			
 		#print(str(i) +" "+ str(j))
 		#print(company)
 		footer=soup.find('div', {'class':'floatR marginT10px'}).small.contents[-1][6:]
 
-		cols = [company, symbol, types[j], market, brokerage, froms, tos,footer]
+		cols = [company, symbol, types[j], market, brokerage, froms, tos, footer]
 		data.append(cols)
 
 
 #add time to file name
-today = datetime.combine(date.today(), datetime.min.time())
-with open ('NADSAQ-updowns-'+today.strftime('%m-%d-%Y')+'.csv','w',newline='') as fp:
+
+with open ('NADSAQ-updowns-'+datetime.now().strftime("%Y-%m-%d %H:%M:%S")+'.csv','w',newline='') as fp:
 	a = csv.writer(fp,delimiter=',')
 	a.writerows(data)

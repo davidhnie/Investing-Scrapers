@@ -23,7 +23,7 @@ s2= sys.argv[2]
 date = datetime.strptime(s1, "%m/%d/%Y")
 end = datetime.strptime(s2, "%m/%d/%Y")
 start = date
-"""
+
 while date<=end:
 
 
@@ -44,11 +44,11 @@ while date<=end:
 			footer=soup.find('div',{'class':'floatR marginT10px TalignR'})
 			footer=footer.small.contents[-1].strip()[12:]
 
-			cols=[symbol,footer,types1[j]+"-"+surprise]
+			cols=[symbol,footer,types1[j]+": "+surprise+"%"]
 			data.append(cols)
 	#set date 
 	date = date + timedelta(days=1)
-"""
+
 #updown
 link="http://www.nasdaq.com/earnings/daily-analyst-recommendations.aspx?type="
 
@@ -69,6 +69,8 @@ for j in range(4):
 			froms = rows[i].find_all('td')[4].string
 			tos = rows[i].find_all('td')[4].string
 
+		brokerage = rows[i].find_all('td')[3].string
+
 		footer=soup.find('div', {'class':'floatR marginT10px'}).small.contents[-1][6:]
 		
 		if froms is None:
@@ -76,10 +78,10 @@ for j in range(4):
 		if tos is None:
 			tos="n/a"
 
-		cols = [symbol, footer, types2[j]+"-"+froms+"-"+tos]
+		cols = [symbol, footer, types2[j]+" by "+brokerage+": "+froms+" -> "+tos]
 		data.append(cols)
 
-with open ('NADSAQ-updown-surprise'+'.csv','w',newline='') as fp:
+with open ('NADSAQ-updown-surprise-'+datetime.now().strftime("%Y-%m-%d %H:%M:%S")+'.csv','w',newline='') as fp:
 	a = csv.writer(fp,delimiter=',')
 	a.writerows(data)
 
