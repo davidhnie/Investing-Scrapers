@@ -1,5 +1,4 @@
 #Author: David
-#combine with earnings -> ticker, date, event_type-[upgrades/downgrades/initiated.. . . - from-to] / [exceeded/met/failed-percentage]
 
 import bs4 as bs
 import urllib
@@ -9,8 +8,7 @@ import csv
 from datetime import datetime, timedelta, date
 
 link="http://www.nasdaq.com/earnings/daily-analyst-recommendations.aspx?type="
-types=["upgraded","downgraded","initiated","reiterated"]
-
+types=["Upgraded","Downgraded","Initiated","Reiterated"]
 
 data=[["Company", "Symbol", "Event_type", "Market", "Brokerage", "From/Initial Recommendation", "To", "Footer Date"]]
 
